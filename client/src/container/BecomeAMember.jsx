@@ -10,11 +10,35 @@ export const BecomeAMember = () => {
     const [form] = Form.useForm();
     const [componentSize, setComponentSize] = useState('default');
     const onFinish = (values) => {
-        const url = '/api/contacts.php'
-        axios.get(url).then(response => response.data)
-            .then((data) => {
-                console.log(data)
+        const url = 'https://aatana.org/api/contacts.php'
+        let formData = new FormData();
+        formData.append('name', values.name)
+        formData.append('spouseName', values.spouseName)
+        formData.append('address', values.address)
+        formData.append('city', values.city)
+        formData.append('state', values.state)
+        formData.append('zipcode', values.zipcode)
+        formData.append('type', values.type)
+        formData.append('email', values.email)
+        formData.append('phone', values.phone)
+        formData.append('pay', values.pay)
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
+        axios({
+            method: 'post',
+            url: url,
+            data: formData,
+            config: { headers: { 'content-type': 'multipart/form-data' } }
+        })
+            .then(function (response) {
+                //handle success
+                console.log(response)
             })
+            .catch(function (response) {
+                //handle error
+                console.log(response)
+            });
         console.log('Received values of form: ', values);
     };
 
