@@ -1,15 +1,62 @@
 
 import "../styles/home.scss";
 import React, { useState } from "react";
-import { Form, Input, Button,Select } from 'antd';
+import { Form, Input, Button, Select, Modal } from 'antd';
+import { PayPal } from '../components/PayPal';
 import SelectUSState from 'react-select-us-states';
 import axios from 'axios';
 
 const { Option } = Select;
 export const BecomeAMember = () => { 
     const [form] = Form.useForm();
+    const [isPayPal, setisPayPal] = useState(false);
+    const [isDataAddedModalVisible, setIsDataAddedModalVisible] = useState(false);
+    const [isZelleModalVisible, setIsZelleModalVisible] = useState(false);
+    const [isChequeModalVisible, setIsChequeModalVisible] = useState(false);
+    const [isEmailExistModalVisible, setIsEmailExistModalVisible] = useState(false);
+    const [IsErrorModalVisible, setIsErrorModalVisible] = useState(false)
+    const [isDisableJoinUsButton, setisDisableJoinUsButton] = useState(false)
     const [componentSize, setComponentSize] = useState('default');
+
+    const onEmailChange = (e) =>{
+        console.log(e.target.value)
+        let formData = new FormData();
+        const url = 'https://aatana.org/api/contacts.php'
+
+        formData.append('email', e.target.value)
+        axios({
+            method: 'get',
+            url: url,
+            data: formData,
+            config: { headers: { 'content-type': 'multipart/form-data' } }
+        })
+            .then(function (response) {
+                if (response.data.includes("Email already")) {
+                    setIsEmailExistModalVisible(true);
+                    setisDisableJoinUsButton(true)
+                }else if (response.data.includes("Email does not")) {
+                    setIsDataAddedModalVisible(true);
+                    setisDisableJoinUsButton(false);
+                } else {
+                    setIsErrorModalVisible(true)
+                }
+
+                console.log(response)
+            })
+            .catch(function (response) {
+                console.log(response)
+            });
+    }
+
     const onFinish = (values) => {
+        if (values.pay === "zelle"){
+            setIsZelleModalVisible(true)
+        } else if (values.pay === "cheque"){
+            setIsChequeModalVisible(true)
+        }else if(values.pay === "paypal"){
+            setisPayPal(true)
+            console.log("To be done")
+        }
         const url = 'https://aatana.org/api/contacts.php'
         let formData = new FormData();
         formData.append('name', values.name)
@@ -32,11 +79,14 @@ export const BecomeAMember = () => {
             config: { headers: { 'content-type': 'multipart/form-data' } }
         })
             .then(function (response) {
-                //handle success
+                if (response.data.includes("Data Added")) {
+                    setIsDataAddedModalVisible(true);
+                }else{
+                    setIsErrorModalVisible(true)
+                } 
                 console.log(response)
             })
             .catch(function (response) {
-                //handle error
                 console.log(response)
             });
         console.log('Received values of form: ', values);
@@ -57,6 +107,16 @@ export const BecomeAMember = () => {
             },
         },
     };
+
+    const handleOk = () => {
+        setIsChequeModalVisible(false);
+        setIsZelleModalVisible(false);
+        setIsEmailExistModalVisible(false);
+        setIsDataAddedModalVisible(false)
+        setIsErrorModalVisible(false)
+    };
+
+
     const prefixSelector = (
         <Form.Item name="prefix" noStyle>
             <Select
@@ -72,6 +132,21 @@ export const BecomeAMember = () => {
 
     return (
         <div>
+            <Modal title="Instructions to pay via Cheque" style={{ top: 20 }} visible={isChequeModalVisible} onOk={() => handleOk()} onCancel={() => handleOk()}>
+                <p>Please write a Cheque to <b>All America Tulu Association</b> </p><p>Mail cheque to : <b>All America Tulu Association 2 Atwood Ln Andover MA 01810 </b></p>
+            </Modal>
+            <Modal title="Instructions to pay via Zelle" style={{ top: 20 }} visible={isZelleModalVisible} onOk={() => handleOk()} onCancel={() => handleOk()}>
+                <p>Please transfer money to : <b>All America Tulu Association </b></p><p><b>Email: </b> aatana.ec@gmail.com</p>
+            </Modal>
+            <Modal title="Info" style={{ top: 20 }} visible={isEmailExistModalVisible} onOk={() => handleOk()}>
+                <p>Your email already exists in our database</p>
+            </Modal>
+            <Modal title="Success" style={{ top: 20 }} visible={isDataAddedModalVisible} onOk={() => handleOk()}>
+                <p>Data Successfully Added</p>
+            </Modal>
+            <Modal title="Error" style={{ top: 20 }} visible={IsErrorModalVisible} onOk={() => handleOk()}>
+                <p>Something went wrong while adding data to our database</p>
+            </Modal>
             <h1 className="homeHeader newsletter">
                 Membership
            </h1>
@@ -135,7 +210,7 @@ export const BecomeAMember = () => {
                             message: 'Please input your E-mail!',
                         },
                     ]}>
-                    <Input />
+                    <Input onChange={ onEmailChange}/>
                 </Form.Item>
                 <Form.Item
                     name="phone"
@@ -174,13 +249,19 @@ export const BecomeAMember = () => {
                     <Select >
                         <Select.Option value="paypal" >Paypal</Select.Option>
                         <Select.Option value="zelle">Zelle</Select.Option>
-                        <Select.Option value="Cash"> Cash</Select.Option>
+                        <Select.Option value="cheque"> Cheque</Select.Option>
                     </Select>
                 </Form.Item>
                 <Form.Item {...tailFormItemLayout}>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" disabled={isDisableJoinUsButton}>
                         Join US
                     </Button>
+                    {/* <Button type="primary" onClick={() => {form.resetFields();}}>
+                        Clear
+                    </Button> */}
+                    {isPayPal ? (<PayPal />) : (<>
+                       
+                    </>)}
                 </Form.Item>
             </Form> 
         </div>
