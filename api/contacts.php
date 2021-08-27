@@ -17,14 +17,16 @@ if (!$con) {
 
 switch ($method) {
     case 'GET':
-      $sql = "select * from `Members`"; 
-      mysqli_query($con, $sql);
-      echo '[';
-      for ($i=0 ; $i<mysqli_num_rows($result) ; $i++) {
-        echo ($i>0?',':'').json_encode(mysqli_fetch_object($result));
+      $email = $_GET['email'];
+      $query = "SELECT Name FROM `Members` WHERE Email = '$email'"; 
+      $result = mysqli_query($con, $query);
+      if($result ->num_rows > 0){
+          echo "Email already exists in our database.";
+          break;
+      }else{
+        echo "Email does not exists in our database.";
+          break; 
       }
-      echo ']';
-      break;
     case 'POST':
       $name = $_POST['name'];
       $spouseName = $_POST['spouseName'];
@@ -35,16 +37,9 @@ switch ($method) {
       $memType = $_POST['type'];
       $email = $_POST['email'];
       $phone = $_POST['phone'];
-      $pMethod = $_POST['pay'];
-      $query = "SELECT Name FROM `Members` WHERE Email = '$email'  and Name = '$name' "; 
-      $result = mysqli_query($con, $query);
-      if($result ->num_rows > 0){
-          echo "Email already exists in our database.";
-          break;
-      }else{
-          $sql = "INSERT INTO `Members`(`Name`, `SpouseName`, `Address`, `City`, `ZiP`, `Email`, `Phone`, `P-Method`, `State`, `MemType`) values ('$name', '$spouseName', '$address', '$city', '$zip', '$email', '$phone', '$pMethod', '$state', '$memType')"; 
-          mysqli_query($con, $sql);
-          echo "Data Added";
-          break; 
-      }
+      $pMethod = $_POST['pay']; 
+      $sql = "INSERT INTO `Members`(`Name`, `SpouseName`, `Address`, `City`, `ZiP`, `Email`, `Phone`, `P-Method`, `State`, `MemType`) values ('$name', '$spouseName', '$address', '$city', '$zip', '$email', '$phone', '$pMethod', '$state', '$memType')"; 
+      mysqli_query($con, $sql);
+      echo "Data Added";
+      break;  
 }
