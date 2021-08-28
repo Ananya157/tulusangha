@@ -34,6 +34,7 @@ import { California } from '../container/RegionalKootas/California';
 import { NewYork } from '../container/RegionalKootas/NewYork';
 import { BecomeAMember } from '../container/BecomeAMember';
 import { ContactUs } from '../container/ContactUs';
+import { CheckMembers } from "../container/CheckMembers";
 
 export const Routes = () => {
     const routes = (
@@ -74,6 +75,7 @@ export const Routes = () => {
             <Route path="/newYork" ><NewYork /></Route>
             <Route path="/becomeAMember" ><BecomeAMember /></Route>
             <Route path="/contactUs" ><ContactUs /></Route>
+            <Route path="/checkMembers"><CheckMembers/></Route>
             <Route path="*"><Redirect to="/home" /></Route>
         </Switch>
     )

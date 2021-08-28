@@ -95,7 +95,10 @@ export const Main = props => {
                             <Menu.Item key="becomeAMember" icon={<UsergroupAddOutlined />}>
                                 <FormattedMessage id="Become A Member" />
                             </Menu.Item>
-                            {/* <Menu.Item key="contactUs" icon={<ContactsOutlined />}>
+                            {/*<Menu.Item key="checkMembers" icon={<UsergroupAddOutlined />}>
+                                <FormattedMessage id="Check Members" />
+                            </Menu.Item>
+                            <Menu.Item key="contactUs" icon={<ContactsOutlined />}>
                                 <FormattedMessage id="Contact Us" />
                             </Menu.Item> */}
                         </Menu>
