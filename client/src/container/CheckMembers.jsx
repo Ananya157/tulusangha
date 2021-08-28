@@ -70,7 +70,7 @@ export const CheckMembers = () => {
   return (
     <div>
         <h1 id='title'>AATA Member Details</h1>
-        <table id='students'>
+        <table id='members'>
             <tbody>
             <tr>{renderTableHeader()}</tr>
                 {renderTableData()}
