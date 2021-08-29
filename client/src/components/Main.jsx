@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Routes } from '../services/Routes'
 import { useHistory } from "react-router-dom"
+import { useMediaQuery } from 'react-responsive';
 import { Row, Col, Layout, Menu, BackTop } from 'antd';
 import {
     HomeOutlined,
@@ -21,7 +22,8 @@ const { Header, Sider, Content } = Layout;
 
 export const Main = props => {
     const history = useHistory();
-    const [sideBarCollapsed, setSideBarCollapsed] = useState(false)
+    const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
+    const [sideBarCollapsed, setSideBarCollapsed] = useState(isMobile)
 
     const toggleSidebar = () => {
         setSideBarCollapsed(!sideBarCollapsed)
@@ -48,7 +50,7 @@ export const Main = props => {
                             </Menu.Item>
                             <SubMenu key="aboutus" icon={<InfoCircleOutlined />} title="About Us">
                                 <Menu.Item key="whoAreWe"><FormattedMessage id="Who Are We?" /></Menu.Item>
-                                {/* <Menu.Item key="byLaw"><FormattedMessage id="By-Law" /></Menu.Item> */}
+                                <Menu.Item key="byLaw"><FormattedMessage id="By-Law" /></Menu.Item>
                             </SubMenu>
                             <SubMenu key="committee" icon={<TeamOutlined />} title="Commitee">
                                 <Menu.Item key="executiveBoard"><FormattedMessage id="Executive Board" /></Menu.Item>

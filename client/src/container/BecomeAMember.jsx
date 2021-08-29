@@ -6,6 +6,7 @@ import { Form, Input, Button, Select, Modal, message } from 'antd';
 import PaypalButtons from "../components/PaypalButtons";
 import SelectUSState from 'react-select-us-states';
 import axios from 'axios';
+import pdf from "../assets/documents/aata_constitution_and_bylaws.pdf";
 
 const { Option } = Select;
 export const BecomeAMember = () => {
@@ -21,7 +22,7 @@ export const BecomeAMember = () => {
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
     const [zipcode, setZipcode] = useState('')
-    const [type, setType] = useState('Grnad Patron')
+    const [type, setType] = useState('Grand Patron')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [pay, setPay] = useState(1000)
@@ -49,8 +50,8 @@ export const BecomeAMember = () => {
                     formData.append('pay', values.pay)
                     setName(values.name); setSpouseName(values.spouseName); setAddress(values.address); setCity(values.city);
                     setState(values.state); setZipcode(values.zipcode); setEmail(values.email); setPhone(values.phone)
-                    if (values.type === 'grnadPatron') {
-                        setPay(1000); setType('Grnad Patron')
+                    if (values.type === 'grandPatron') {
+                        setPay(1000); setType('Grand Patron')
                     } else if (values.type === 'patron') {
                         setPay(500); setType('Patron')
                     } else if (values.type === 'family') {
@@ -165,7 +166,7 @@ export const BecomeAMember = () => {
                     }}
                     layout="horizontal"
                     initialValues={{
-                        type: 'grnadPatron',
+                        type: 'grandPatron',
                         prefix: '+1',
                         pay: 'cheque'
                     }}
@@ -174,7 +175,7 @@ export const BecomeAMember = () => {
                 >
                     <Form.Item label="Registration Type" name="type">
                         <Select>
-                            <Select.Option value="grnadPatron" >Grand Patron-$1000</Select.Option>
+                            <Select.Option value="grandPatron" >Grand Patron-$1000</Select.Option>
                             <Select.Option value="patron">Patron-$500</Select.Option>
                             <Select.Option value="family">Family-$100 </Select.Option>
                             <Select.Option value="individual">Individual-$50</Select.Option>
@@ -238,12 +239,14 @@ export const BecomeAMember = () => {
                         </Select>
                     </Form.Item>
                     <Form.Item {...tailFormItemLayout}>
+                        
                         <Button type="primary" htmlType="submit" className="joinUsButton">
                             Join US
                     </Button>
                         {}
                     </Form.Item>
                 </Form>
+                <h4 className='disclamer_bylaw'>*Please note that by clicking Join Us you agree to abide by the <a href = {pdf} target = "_blank">By-Laws</a> of the association</h4>
             </div>
         )
     }

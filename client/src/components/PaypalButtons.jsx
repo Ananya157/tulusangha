@@ -7,8 +7,8 @@ import axios from 'axios';
 import { message } from 'antd'
 
 const CLIENT = {
-    sandbox: "Af25HL_akZaLaxCTiQj0Fg7SF-o5uooxh51HxmJmqTfQcsrXoZB5aPOoqjQYeZbGAmRWcFy5BKEAZYp8",
-    production: "Af25HL_akZaLaxCTiQj0Fg7SF-o5uooxh51HxmJmqTfQcsrXoZB5aPOoqjQYeZbGAmRWcFy5BKEAZYp8"
+    sandbox: "Aa7mAU7gnIw3MGT62xbYCTY2eR_JT-FC4h9aX5j96Eh2cQdmSvP3yWp4eZL-8bteYuODT-e7b1GCFMFj",
+    production: "Aa7mAU7gnIw3MGT62xbYCTY2eR_JT-FC4h9aX5j96Eh2cQdmSvP3yWp4eZL-8bteYuODT-e7b1GCFMFj"
 };
 
 const CLIENT_ID =
@@ -56,10 +56,10 @@ class PaypalButton extends React.Component {
         return actions.order.create({
             purchase_units: [
                 {
-                    description: +"Mercedes G-Wagon",
+                    description: +"All America Tulu Association Membership",
                     amount: {
                         currency_code: "USD",
-                        value: 1
+                        value: this.props.pay
                     }
                 }
             ]
@@ -90,7 +90,7 @@ class PaypalButton extends React.Component {
                 })
                     .then(function (response) {
                         if (response.data.includes("Data Added")) {
-                            message.success('Data Successfully Added', 5);
+                            message.success('Thank you for joining AATA', 5);
                         } else {
                             message.error('Something went wrong while adding data to our database', 5);
                         }
