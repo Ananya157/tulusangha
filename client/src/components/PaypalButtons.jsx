@@ -59,7 +59,7 @@ class PaypalButton extends React.Component {
                     description: +"Mercedes G-Wagon",
                     amount: {
                         currency_code: "USD",
-                        value: 1
+                        value: this.props.pay
                     }
                 }
             ]
