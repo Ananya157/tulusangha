@@ -25,7 +25,8 @@ export const BecomeAMember = () => {
     const [type, setType] = useState('Grand Patron')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
-    const [pay, setPay] = useState(1000)
+    const [pay, setPay] = useState('')
+    const [amount, setAmount] = useState('1000')
 
     const onFinish = (values) => {
         const url = 'https://aatana.org/api/contacts.php?email=' + values.email
@@ -48,16 +49,21 @@ export const BecomeAMember = () => {
                     formData.append('email', values.email)
                     formData.append('phone', values.phone)
                     formData.append('pay', values.pay)
+                    formData.append('amount', values.amount)
                     setName(values.name); setSpouseName(values.spouseName); setAddress(values.address); setCity(values.city);
-                    setState(values.state); setZipcode(values.zipcode); setEmail(values.email); setPhone(values.phone)
+                    setState(values.state); setZipcode(values.zipcode); setEmail(values.email); setPhone(values.phone); setPay(values.pay);
                     if (values.type === 'grandPatron') {
-                        setPay(1000); setType('Grand Patron')
+                        setAmount(1000); setType('Grand Patron')
+                        formData.append('amount', 1000)
                     } else if (values.type === 'patron') {
-                        setPay(500); setType('Patron')
+                        setAmount(500); setType('Patron')
+                        formData.append('amount', 500)
                     } else if (values.type === 'family') {
-                        setPay(100); setType('Family')
+                        setAmount(100); setType('Family')
+                        formData.append('amount', 100)
                     } else if (values.type === 'individual') {
-                        setPay(50); setType('Individual')
+                        setAmount(50); setType('Individual')
+                        formData.append('amount', 50)
                     }
                     let addData = false;
                     if (values.pay === "zelle") {
@@ -138,7 +144,7 @@ export const BecomeAMember = () => {
             <div>
                 <MembershipHeader />
                 <PaypalButtons name={name} spouseName={spouseName} address={address} city={city} state={state} zipcode={zipcode} type={type}
-                    email={email} phone={phone} pay={pay} />
+                    email={email} phone={phone} pay={pay} amount={amount}/>
             </div>
         )
     } else {

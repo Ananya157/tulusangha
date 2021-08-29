@@ -39,7 +39,8 @@ switch ($method) {
       $email = $_POST['email'];
       $phone = $_POST['phone'];
       $pMethod = $_POST['pay']; 
-      $sql = "INSERT INTO `Members`(`Name`, `SpouseName`, `Address`, `City`, `ZiP`, `Email`, `Phone`, `P-Method`, `State`, `MemType`) values ('$name', '$spouseName', '$address', '$city', '$zip', '$email', '$phone', '$pMethod', '$state', '$memType')"; 
+      $amount = $_POST['amount'];
+      $sql = "INSERT INTO `Members`(`Name`, `SpouseName`, `Address`, `City`, `ZiP`, `Email`, `Phone`, `P-Method`, `State`, `MemType`, `Amount`) values ('$name', '$spouseName', '$address', '$city', '$zip', '$email', '$phone', '$pMethod', '$state', '$memType', '$amount')"; 
       $eLog="/tmp/mailError.log";
       //Get the size of the error log
       //ensure it exists, create it if it doesn't
@@ -48,7 +49,7 @@ switch ($method) {
       $originalsize = filesize($eLog);
       //Details to send an email to the member who registers. Note to remember is that in the current server we can only send 250 emails per day.
       $message_line1 = "Thank you for joining the All America Tulu Association. Please find the details you have entered below \n"; 
-      $message_line2 = "Name: ".$name."\n"."Spouse Name: ".$spouseName."\n"."Address: ".$address."\n"."City: ".$city."\n"."State: ".$state."\n"."ZipCode: ".$zip."\n"."Membership Type: ".$memType."\n"."Email: ".$email."\n"."Phone: ".$phone."\n"."Payment Method: ".$pMethod."\n";
+      $message_line2 = "Name: ".$name."\n"."Spouse Name: ".$spouseName."\n"."Address: ".$address."\n"."City: ".$city."\n"."State: ".$state."\n"."ZipCode: ".$zip."\n"."Membership Type: ".$memType."\n"."Email: ".$email."\n"."Phone: ".$phone."\n"."Payment Method: ".$pMethod."\n"."Amount: ".$amount."\n";
       if($pMethod == 'zelle'){
         $message_line3 = "\nPlease transfer the amount corresponding to your membership as a ".$memType." ,through zelle to the ID: aatana.ec@gmail.com . Your membership will be confirmed once we receive your payment.\n";
       }

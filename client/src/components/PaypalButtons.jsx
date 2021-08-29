@@ -79,6 +79,7 @@ class PaypalButton extends React.Component {
             formData.append('email', this.props.email)
             formData.append('phone', this.props.phone)
             formData.append('pay', this.props.pay)
+            formData.append('amount', this.props.amount)
             
             if (details.status === "COMPLETED"){
                 const url = 'https://aatana.org/api/contacts.php'
