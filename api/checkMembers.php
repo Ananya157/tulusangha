@@ -19,7 +19,7 @@ function filterData(&$str){
 $fileName = "members-data_" . date('Y-m-d') . ".xls"; 
  
 // Column names 
-$fields = array('ID', 'Name', 'Spouse Name', 'Address', 'City', 'ZiP', 'Email', 'Phone', 'Payment Method', 'State', 'MemType', 'Amount'); 
+$fields = array('ID', 'Name', 'Spouse Name', 'Address', 'City', 'ZIP', 'Email', 'Phone', 'Payment Method', 'State', 'MemType', 'Amount'); 
  
 // Display column names as first row 
 $excelData = implode("\t", array_values($fields)) . "\n"; 
@@ -29,7 +29,7 @@ $query = $con->query("select *, `P-Method` as PaymentMethod from `Members`");
 if($query->num_rows > 0){ 
     // Output each row of the data 
     while($row = $query->fetch_assoc()){ 
-        $lineData = array($row['ID'], $row['Name'], $row['SpouseName'], $row['Address'], $row['City'], $row['ZiP'], $row['Email'], $row['Phone'], $row['PaymentMethod'], $row['State'], $row['MemType'], $row['Amount']); 
+        $lineData = array($row['ID'], $row['Name'], $row['SpouseName'], $row['Address'], $row['City'], $row['ZIP'], $row['Email'], $row['Phone'], $row['PaymentMethod'], $row['State'], $row['MemType'], $row['Amount']); 
         array_walk($lineData, 'filterData'); 
         $excelData .= implode("\t", array_values($lineData)) . "\n"; 
     } 

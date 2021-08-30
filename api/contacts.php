@@ -40,7 +40,7 @@ switch ($method) {
       $phone = $_POST['phone'];
       $pMethod = $_POST['pay']; 
       $amount = $_POST['amount'];
-      $sql = "INSERT INTO `Members`(`Name`, `SpouseName`, `Address`, `City`, `ZiP`, `Email`, `Phone`, `P-Method`, `State`, `MemType`, `Amount`) values ('$name', '$spouseName', '$address', '$city', '$zip', '$email', '$phone', '$pMethod', '$state', '$memType', '$amount')"; 
+      $sql = "INSERT INTO `Members`(`Name`, `SpouseName`, `Address`, `City`, `ZIP`, `Email`, `Phone`, `P-Method`, `State`, `MemType`, `Amount`) values ('$name', '$spouseName', '$address', '$city', '$zip', '$email', '$phone', '$pMethod', '$state', '$memType', '$amount')"; 
       $eLog="/tmp/mailError.log";
       //Get the size of the error log
       //ensure it exists, create it if it doesn't

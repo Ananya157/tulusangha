@@ -59,7 +59,7 @@ class PaypalButton extends React.Component {
                     description: +"All America Tulu Association Membership",
                     amount: {
                         currency_code: "USD",
-                        value: this.props.pay
+                        value: this.props.amount
                     }
                 }
             ]
@@ -115,7 +115,7 @@ class PaypalButton extends React.Component {
                     <div>
                         <div>
                             <h2>Membership type: {this.props.type}</h2>
-                            <h2>Total checkout Amount ${this.props.pay}</h2>
+                            <h2>Total checkout Amount ${this.props.amount}</h2>
                         </div>
 
                         <PayPalButton
