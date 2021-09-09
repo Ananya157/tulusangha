@@ -47,7 +47,7 @@ switch ($method) {
       }
       elseif($pMethod == 'paypal')
       {
-        $message_line2 = "\nThank you far your payment via Paypal. Please find the entered details below:\n";
+        $message_line2 = "\nThank you far your donation via Paypal. Please find the entered details below:\n";
       }
       $message_line3 = "Name: ".$name."\n"."Current Member: ".$member."\n"."Address: ".$address."\n"."City: ".$city."\n"."State: ".$state."\n"."ZipCode: ".$zip."\n"."Donation Purpose: ".$donationPurpose."\n"."Email: ".$email."\n"."Phone: ".$phone."\n"."Payment Method: ".$pMethod."\n"."Amount: ".$amount."\n";
       $message_line4 = "\n\nFor any further questions please contact us at aatana.ec@gmail.com\n";
