@@ -33,6 +33,7 @@ import { Boston } from '../container/RegionalKootas/Boston';
 import { California } from '../container/RegionalKootas/California';
 import { NewYork } from '../container/RegionalKootas/NewYork';
 import { BecomeAMember } from '../container/BecomeAMember';
+import { Donate } from '../container/Donate';
 import { ContactUs } from '../container/ContactUs';
 import { CheckMembers } from "../container/CheckMembers";
 
@@ -74,6 +75,7 @@ export const Routes = () => {
             <Route path="/california" ><California /></Route>
             <Route path="/newYork" ><NewYork /></Route>
             <Route path="/becomeAMember" ><BecomeAMember /></Route>
+            <Route path="/donate" ><Donate /></Route>
             <Route path="/contactUs" ><ContactUs /></Route>
             <Route path="/checkMembers"><CheckMembers/></Route>
             <Route path="*"><Redirect to="/home" /></Route>
