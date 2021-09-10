@@ -59,8 +59,9 @@ class PaypalButton extends React.Component {
                     description: +"All America Tulu Association Membership",
                     amount: {
                         currency_code: "USD",
+
                         value: this.props.amount
-                    }
+     }
                 }
             ]
         });
