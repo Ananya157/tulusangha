@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Routes } from '../services/Routes'
 import { useHistory } from "react-router-dom"
-import { useMediaQuery } from 'react-responsive';
 import { Row, Col, Layout, Menu, BackTop } from 'antd';
 import {
     HomeOutlined,
     InfoCircleOutlined,
     TeamOutlined,
-    CalendarOutlined,
+    VideoCameraOutlined,
     HistoryOutlined,
     UsergroupAddOutlined,
     UpOutlined
@@ -22,8 +21,7 @@ const { Header, Sider, Content } = Layout;
 
 export const Main = props => {
     const history = useHistory();
-    const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
-    const [sideBarCollapsed, setSideBarCollapsed] = useState(isMobile)
+    const [sideBarCollapsed, setSideBarCollapsed] = useState(false)
 
     const toggleSidebar = () => {
         setSideBarCollapsed(!sideBarCollapsed)
@@ -50,7 +48,7 @@ export const Main = props => {
                             </Menu.Item>
                             <SubMenu key="aboutus" icon={<InfoCircleOutlined />} title="About Us">
                                 <Menu.Item key="whoAreWe"><FormattedMessage id="Who Are We?" /></Menu.Item>
-                                <Menu.Item key="byLaw"><FormattedMessage id="By-Law" /></Menu.Item>
+                                {/* <Menu.Item key="byLaw"><FormattedMessage id="By-Law" /></Menu.Item> */}
                             </SubMenu>
                             <SubMenu key="committee" icon={<TeamOutlined />} title="Commitee">
                                 <Menu.Item key="executiveBoard"><FormattedMessage id="Executive Board" /></Menu.Item>
@@ -65,7 +63,7 @@ export const Main = props => {
                                 <Menu.Item key="donors"><FormattedMessage id="Donors" /></Menu.Item>
                                 <Menu.Item key="ourPartners"><FormattedMessage id="Our Partners" /></Menu.Item>
                             </SubMenu> */}
-                            <SubMenu key="activities" icon={<CalendarOutlined />} title="Activities">
+                            <SubMenu key="activities" icon={<VideoCameraOutlined />} title="Activities">
                                 {/* <Menu.Item key="events"><FormattedMessage id="Events" /></Menu.Item> */}
                                 <Menu.Item key="mediaCoverage"><FormattedMessage id="Media Coverage" /></Menu.Item>
                                 <Menu.Item key="newsletter"><FormattedMessage id="Newsletter" /></Menu.Item>
@@ -96,6 +94,9 @@ export const Main = props => {
                             </SubMenu> */}
                             <Menu.Item key="becomeAMember" icon={<UsergroupAddOutlined />}>
                                 <FormattedMessage id="Become A Member" />
+                            </Menu.Item>
+                            <Menu.Item key="donate" icon={<UsergroupAddOutlined />}>
+                                <FormattedMessage id="Want to Donate?" />
                             </Menu.Item>
                             {/*<Menu.Item key="checkMembers" icon={<UsergroupAddOutlined />}>
                                 <FormattedMessage id="Check Members" />
