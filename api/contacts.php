@@ -41,27 +41,22 @@ switch ($method) {
       $pMethod = $_POST['pay']; 
       $amount = $_POST['amount'];
       $sql = "INSERT INTO `Members`(`Name`, `SpouseName`, `Address`, `City`, `ZIP`, `Email`, `Phone`, `P-Method`, `State`, `MemType`, `Amount`) values ('$name', '$spouseName', '$address', '$city', '$zip', '$email', '$phone', '$pMethod', '$state', '$memType', '$amount')"; 
-      $eLog="/tmp/mailError.log";
-      //Get the size of the error log
-      //ensure it exists, create it if it doesn't
-      $fh= fopen($eLog, "a+");
-      fclose($fh);
-      $originalsize = filesize($eLog);
+      
       //Details to send an email to the member who registers. Note to remember is that in the current server we can only send 250 emails per day.
-      $message_line1 = "Thank you for joining the All America Tulu Association. Please find the details you have entered below \n"; 
-      $message_line2 = "Name: ".$name."\n"."Spouse Name: ".$spouseName."\n"."Address: ".$address."\n"."City: ".$city."\n"."State: ".$state."\n"."ZipCode: ".$zip."\n"."Membership Type: ".$memType."\n"."Email: ".$email."\n"."Phone: ".$phone."\n"."Payment Method: ".$pMethod."\n"."Amount: ".$amount."\n";
+      $message_line1 = "Thank you for joining the All America Tulu Association. \n"; 
+      
       if($pMethod == 'zelle'){
-        $message_line3 = "\nPlease transfer the amount corresponding to your membership as a ".$memType." ,through zelle to the ID: aatana.ec@gmail.com . Your membership will be confirmed once we receive your payment.\n";
+        $message_line2 = "\nPlease transfer the amount corresponding to your membership as a ".$memType." ,through zelle to the ID: aatana.ec@gmail.com . Your membership will be confirmed once we receive your payment. \nPlease find the entered details below:\n";
       }
       elseif($pMethod == 'cheque')
       {
-        $message_line3 = "\nPlease send the amount corresponding to your membership as a ".$memType.",through check to the address:\nAll America Tulu Association \n2 Atwood Ln Andover MA 01810. \nPlease write your cheque to \"All America Tulu Association\". \nYour membership will be confirmed once we receive your payment.\n";
+        $message_line2 = "\nPlease send the amount corresponding to your membership as a ".$memType.",through check to the address:\nAll America Tulu Association \n2 Atwood Ln Andover MA 01810. \nPlease write your cheque to \"All America Tulu Association\". \nYour membership will be confirmed once we receive your payment. \nPlease find the entered details below:\n";
       }
       elseif($pMethod == 'paypal')
       {
-        $message_line3 = "\nThank you far your payment via Paypal. Your membership will be confirmed once we verify your payment.\n";
+        $message_line2= "\nYour payment is via Paypal. Your membership will be confirmed once we verify your payment. \nPlease find the entered details below:\n";
       }
-
+      $message_line3 = "Name: ".$name."\n"."Spouse Name: ".$spouseName."\n"."Address: ".$address."\n"."City: ".$city."\n"."State: ".$state."\n"."ZipCode: ".$zip."\n"."Membership Type: ".$memType."\n"."Email: ".$email."\n"."Phone: ".$phone."\n"."Payment Method: ".$pMethod."\n"."Amount: ".$amount."\n";
       $message_line4 = "\n\nFor any further questions please contact us at aatana.ec@gmail.com\n";
 
       $message_body = $message_line1.$message_line2.$message_line3.$message_line4;
@@ -77,21 +72,6 @@ switch ($method) {
       //Email sent
       mail($to, $subject, $message_body);
 
-      /*
-      * NOTE: PHP caches file status so we need to clear
-      * that cache so we can get the current file size
-      */
-
-      clearstatcache();
-      $finalsize = filesize($eLog);
-      //Check if the error log was just updated
-      if ($originalsize != $finalsize) {
-        print "Problem sending mail. (size was $originalsize, now $finalsize) See $eLog
-        ";
-        } else {
-        print " Mail sent to $email";
-        }
-      
       break;  
 }
 

@@ -1,7 +1,7 @@
 
 import "../styles/home.scss";
 import React, { useState } from "react";
-import { Form, Input, Button, Select, Modal, message, Switch } from 'antd';
+import { Form, Input, Button, Select, Modal, message } from 'antd';
 import PaypalButtons from "../components/PaypalButtons";
 import SelectUSState from 'react-select-us-states';
 import axios from 'axios';
@@ -15,7 +15,7 @@ export const Donate = () => {
     const [isChequeModalVisible, setIsChequeModalVisible] = useState(false);
     const [componentSize, setComponentSize] = useState('default');
     const [name, setName] = useState('')
-    const [member, setMember] = useState(false)
+    const [member, setMember] = useState('no')
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
@@ -24,6 +24,7 @@ export const Donate = () => {
     const [purpose, setPurpose] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
+    const [pay, setPay] = useState('')
 
     const onFinish = (values) => {
         let formData = new FormData();
@@ -39,7 +40,7 @@ export const Donate = () => {
         formData.append('phone', values.phone)
         formData.append('pay', values.pay)
         setName(values.name); setMember(values.currentMember); setAddress(values.address); setCity(values.city); setPurpose(values.purpose)
-        setState(values.state); setZipcode(values.zipcode); setEmail(values.email); setPhone(values.phone); setAmount(values.amount);
+        setState(values.state); setZipcode(values.zipcode); setEmail(values.email); setPhone(values.phone); setAmount(values.amount); setPay(values.pay);
         let addData = false;
         if (values.pay === "zelle") {
             setIsZelleModalVisible(true);
@@ -50,8 +51,9 @@ export const Donate = () => {
         } else if (values.pay === "paypal") {
             setisPayPal(true);
         }
+        console.log(formData)
         if (addData) {
-            console.log(formData)
+            
             const url = 'https://aatana.org/api/donors.php'
             axios({
                 method: 'post',
@@ -112,7 +114,7 @@ export const Donate = () => {
         return (
             <div>
                 <PaypalButtons page={page} name={name} member={member} address={address} city={city} state={state} zipcode={zipcode} amount={amount} purpose={purpose}
-                    email={email} phone={phone} />
+                    email={email} phone={phone} pay={pay}/>
             </div>
         )
     } else {
@@ -137,7 +139,8 @@ export const Donate = () => {
                     layout="horizontal"
                     initialValues={{
                         prefix: '+1',
-                        pay: 'cheque'
+                        pay: 'cheque',
+                        currentMember: 'no'
                     }}
                     onValuesChange={onFormLayoutChange}
                     size={componentSize}
@@ -146,8 +149,11 @@ export const Donate = () => {
                         rules={[{ required: true, message: 'Please enter your name!', },]} >
                         <Input />
                     </Form.Item>
-                    <Form.Item label="Are you a current member?" name="currentMember" valuePropName="checked">
-                        <Switch />
+                    <Form.Item label="AATA Member?" name="currentMember">
+                        <Select>
+                            <Select.Option value="yes">Yes</Select.Option>
+                            <Select.Option value="no" >No</Select.Option>
+                        </Select>
                     </Form.Item>
                     <Form.Item
                         name="email"
@@ -209,7 +215,7 @@ export const Donate = () => {
                     </Form.Item>
                     <Form.Item {...tailFormItemLayout}>
                         <Button type="primary" htmlType="submit" className="joinUsButton">
-                            Join US
+                            Please Donate
                     </Button>
                         {}
                     </Form.Item>

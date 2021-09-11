@@ -5,7 +5,7 @@ $host = "mysql";
 $user = "AataDB21"; 
 $password = "AataDB21@"; 
 $dbname = "db_aata"; 
-$email = '';
+
 
 $con = mysqli_connect($host, $user, $password,$dbname);
 $method = $_SERVER['REQUEST_METHOD'];
@@ -16,6 +16,11 @@ if (!$con) {
 }
 
 switch ($method) {
+    case 'GET':
+      $query = "SELECT * FROM `Donors`"; 
+      $result = mysqli_query($con, $query);
+      echo "Working";
+      break;
     case 'POST':
       $name = $_POST['name'];
       $member = $_POST['member'];
@@ -27,7 +32,7 @@ switch ($method) {
       $phone = $_POST['phone'];
       $pMethod = $_POST['pay']; 
       $amount = $_POST['amount'];
-      $donationPurpose = $_POST('purpose');
+      $donationPurpose = $_POST['purpose'];
       $sql = "INSERT INTO `Donors`(`Name`, `Member`, `Address`, `City`, `ZIP`, `Email`, `Phone`, `P-Method`, `State`, `DonationPurpose`, `Amount`) values ('$name', '$member', '$address', '$city', '$zip', '$email', '$phone', '$pMethod', '$state', '$donationPurpose', '$amount')"; 
       $eLog="/tmp/mailError.log";
       //Get the size of the error log
@@ -47,7 +52,7 @@ switch ($method) {
       }
       elseif($pMethod == 'paypal')
       {
-        $message_line2 = "\nThank you far your donation via Paypal. Please find the entered details below:\n";
+        $message_line2 = "\nYour donation is via Paypal. Please find the entered details below:\n";
       }
       $message_line3 = "Name: ".$name."\n"."Current Member: ".$member."\n"."Address: ".$address."\n"."City: ".$city."\n"."State: ".$state."\n"."ZipCode: ".$zip."\n"."Donation Purpose: ".$donationPurpose."\n"."Email: ".$email."\n"."Phone: ".$phone."\n"."Payment Method: ".$pMethod."\n"."Amount: ".$amount."\n";
       $message_line4 = "\n\nFor any further questions please contact us at aatana.ec@gmail.com\n";

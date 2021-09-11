@@ -10,6 +10,7 @@ import pdf from "../assets/documents/aata_constitution_and_bylaws.pdf";
 
 const { Option } = Select;
 export const BecomeAMember = () => {
+    const page = "Member"
     const [form] = Form.useForm();
     const [isPayPal, setisPayPal] = useState(false);
     const [isZelleModalVisible, setIsZelleModalVisible] = useState(false);
@@ -143,7 +144,7 @@ export const BecomeAMember = () => {
         return (
             <div>
                 <MembershipHeader />
-                <PaypalButtons name={name} spouseName={spouseName} address={address} city={city} state={state} zipcode={zipcode} type={type}
+                <PaypalButtons page={page} name={name} spouseName={spouseName} address={address} city={city} state={state} zipcode={zipcode} type={type}
                     email={email} phone={phone} pay={pay} amount={amount}/>
             </div>
         )

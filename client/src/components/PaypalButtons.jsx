@@ -7,8 +7,11 @@ import axios from 'axios';
 import { message } from 'antd'
 
 const CLIENT = {
-    sandbox: "Af25HL_akZaLaxCTiQj0Fg7SF-o5uooxh51HxmJmqTfQcsrXoZB5aPOoqjQYeZbGAmRWcFy5BKEAZYp8",
-    production: "Af25HL_akZaLaxCTiQj0Fg7SF-o5uooxh51HxmJmqTfQcsrXoZB5aPOoqjQYeZbGAmRWcFy5BKEAZYp8"
+    //Commented ID is production version. Always uncomment the correct ID while deploying.
+    //sandbox: "Aa7mAU7gnIw3MGT62xbYCTY2eR_JT-FC4h9aX5j96Eh2cQdmSvP3yWp4eZL-8bteYuODT-e7b1GCFMFj",
+    //production: "Aa7mAU7gnIw3MGT62xbYCTY2eR_JT-FC4h9aX5j96Eh2cQdmSvP3yWp4eZL-8bteYuODT-e7b1GCFMFj"
+    sandbox: "AVRxqx_n10Ia4qNVrdvUt-V3bUyL1xc6J8vvasAOkWYfLd7BwyCkJ46AKJLQGOqjTPa4jrEgsV-7fOtp",
+    production: "AVRxqx_n10Ia4qNVrdvUt-V3bUyL1xc6J8vvasAOkWYfLd7BwyCkJ46AKJLQGOqjTPa4jrEgsV-7fOtp"
 };
 
 const CLIENT_ID =
@@ -56,10 +59,11 @@ class PaypalButton extends React.Component {
         return actions.order.create({
             purchase_units: [
                 {
-                    description: +"Mercedes G-Wagon",
+                    description: +"All America Tulu Association Membership",
                     amount: {
                         currency_code: "USD",
-                        value: this.props.pay
+
+                        value: this.props.amount
                     }
                 }
             ]
@@ -70,7 +74,6 @@ class PaypalButton extends React.Component {
         actions.order.capture().then(details => {
             let formData = new FormData();
             formData.append('name', this.props.name)
-            formData.append('spouseName', this.props.spouseName)
             formData.append('address', this.props.address)
             formData.append('city', this.props.city)
             formData.append('state', this.props.state)
@@ -79,9 +82,28 @@ class PaypalButton extends React.Component {
             formData.append('email', this.props.email)
             formData.append('phone', this.props.phone)
             formData.append('pay', this.props.pay)
+            formData.append('amount', this.props.amount)
+            if(this.props.page === "Donate")
+            {
+                formData.append('member', this.props.member)
+                formData.append('purpose', this.props.purpose)
+            }
+            else
+            {
+                formData.append('spouseName', this.props.spouseName)
+            }
             
             if (details.status === "COMPLETED"){
-                const url = 'https://aatana.org/api/contacts.php'
+                let url = "";
+                if(this.props.page === "Donate")
+                {
+                    url = 'https://aatana.org/api/donors.php'
+                }
+                else
+                {
+                    url = 'https://aatana.org/api/contacts.php'
+                }
+                
                 axios({
                     method: 'post',
                     url: url,
@@ -114,7 +136,7 @@ class PaypalButton extends React.Component {
                     <div>
                         <div>
                             <h2>Membership type: {this.props.type}</h2>
-                            <h2>Total checkout Amount ${this.props.pay}</h2>
+                            <h2>Total checkout Amount ${this.props.amount}</h2>
                         </div>
 
                         <PayPalButton
