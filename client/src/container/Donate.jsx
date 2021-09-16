@@ -140,7 +140,8 @@ export const Donate = () => {
                     initialValues={{
                         prefix: '+1',
                         pay: 'cheque',
-                        currentMember: 'no'
+                        currentMember: 'no', 
+                        purpose: 'Charity'
                     }}
                     onValuesChange={onFormLayoutChange}
                     size={componentSize}
@@ -202,9 +203,12 @@ export const Donate = () => {
                         rules={[{ required: true, message: 'Please enter the amount you want to donate!', },]} >
                         <Input />
                     </Form.Item>
-                    <Form.Item label="Donation Purpose" name="purpose"
-                        rules={[{ required: true, message: 'Please enter the purpose of your donation!', },]} >
-                        <Input />
+                    <Form.Item label="Donation Purpose" name="purpose">
+                        <Select>
+                            <Select.Option value="Charity">Charity</Select.Option>
+                            <Select.Option value="Inauguration">Inauguration</Select.Option>
+                            <Select.Option value="Other">Other</Select.Option>
+                        </Select>
                     </Form.Item>
                     <Form.Item label="Payment" name="pay">
                         <Select>
