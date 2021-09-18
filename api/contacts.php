@@ -50,7 +50,7 @@ switch ($method) {
       }
       elseif($pMethod == 'cheque')
       {
-        $message_line2 = "\nPlease send the amount corresponding to your membership as a ".$memType.",through check to the address:\nAll America Tulu Association \n2 Atwood Ln Andover MA 01810. \nPlease write your cheque to \"All America Tulu Association\". \nYour membership will be confirmed once we receive your payment. \nPlease find the entered details below:\n";
+        $message_line2 = "\nPlease send the amount corresponding to your membership as a ".$memType.",through check to the address:\nAll America Tulu Association \n2 Atwood Ln Andover MA 01810. \n\nPlease write your cheque to \"All America Tulu Association\". \n\n\nYour membership will be confirmed once we receive your payment. \nPlease find the entered details below:\n";
       }
       elseif($pMethod == 'paypal')
       {
@@ -70,7 +70,7 @@ switch ($method) {
       $subject = "AATA membership details of ".$name;
       
       //Email sent
-      mail($to, $subject, $message_body);
+      mail($to, $subject, $message_body, "Cc:aatana.ec@gmail.com, subhasshetty@gmail.com");
 
       break;  
 }

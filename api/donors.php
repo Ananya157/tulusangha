@@ -48,7 +48,7 @@ switch ($method) {
       }
       elseif($pMethod == 'cheque')
       {
-        $message_line2 = "\nPlease send the donation amount through check to the address:\nAll America Tulu Association \n2 Atwood Ln Andover MA 01810. \nPlease write your cheque to \"All America Tulu Association\". \nPlease find the entered details below:\n";
+        $message_line2 = "\nPlease send the donation amount through check to the address:\nAll America Tulu Association \n2 Atwood Ln Andover MA 01810. \n\nPlease write your cheque to \"All America Tulu Association\". \n\n\nPlease find the entered details below:\n";
       }
       elseif($pMethod == 'paypal')
       {
@@ -68,7 +68,7 @@ switch ($method) {
       $subject = "AATA donation details of ".$name;
       
       //Email sent
-      mail($to, $subject, $message_body);
+      mail($to, $subject, $message_body, "Cc:aatana.ec@gmail.com, subhasshetty@gmail.com");
 
       /*
       * NOTE: PHP caches file status so we need to clear
