@@ -32,8 +32,9 @@ switch ($method) {
       $phone = $_POST['phone'];
       $pMethod = $_POST['pay']; 
       $amount = $_POST['amount'];
+      $donorType = $_POST['type'];
       $donationPurpose = $_POST['purpose'];
-      $sql = "INSERT INTO `Donors`(`Name`, `Member`, `Address`, `City`, `ZIP`, `Email`, `Phone`, `P-Method`, `State`, `DonationPurpose`, `Amount`) values ('$name', '$member', '$address', '$city', '$zip', '$email', '$phone', '$pMethod', '$state', '$donationPurpose', '$amount')"; 
+      $sql = "INSERT INTO `Donors`(`Name`, `Member`, `Address`, `City`, `ZIP`, `Email`, `Phone`, `P-Method`, `State`, `DonorType`, `DonationPurpose`, `Amount`) values ('$name', '$member', '$address', '$city', '$zip', '$email', '$phone', '$pMethod', '$state','$donorType', '$donationPurpose', '$amount')"; 
       $eLog="/tmp/mailError.log";
       //Get the size of the error log
       //ensure it exists, create it if it doesn't
