@@ -40,18 +40,18 @@ switch ($method) {
       fclose($fh);
       $originalsize = filesize($eLog);
       //Details to send an email to the member who registers. Note to remember is that in the current server we can only send 250 emails per day.
-      $message_line1 = "Thank you for your donation to All America Tulu Association.\n"; 
+      $message_line1 = "Thank you for your sponsorship to All America Tulu Association.\n"; 
       
       if($pMethod == 'zelle'){
-        $message_line2 = "\nPlease transfer the donation amount through zelle to the ID: aatana.ec@gmail.com. Please find the entered details below:\n";
+        $message_line2 = "\nPlease transfer the sponsorship amount through zelle to the ID: aatana.ec@gmail.com. Please find the entered details below:\n";
       }
       elseif($pMethod == 'cheque')
       {
-        $message_line2 = "\nPlease send the donation amount through check to the address:\nAll America Tulu Association \n2 Atwood Ln Andover MA 01810. \n\nPlease write your cheque to \"All America Tulu Association\". \n\n\nPlease find the entered details below:\n";
+        $message_line2 = "\nPlease send the sponsorship amount through check to the address:\nAll America Tulu Association \n2 Atwood Ln Andover MA 01810. \n\nPlease write your cheque to \"All America Tulu Association\". \n\n\nPlease find the entered details below:\n";
       }
       elseif($pMethod == 'paypal')
       {
-        $message_line2 = "\nYour donation is via Paypal. Please find the entered details below:\n";
+        $message_line2 = "\nYour sponsorship is via Paypal. Please find the entered details below:\n";
       }
       $message_line3 = "Name: ".$name."\n"."Address: ".$address."\n"."City: ".$city."\n"."State: ".$state."\n"."ZipCode: ".$zip."\n"."Sponsor Purpose: ".$sponsorPurpose."\n"."Email: ".$email."\n"."Phone: ".$phone."\n"."Payment Method: ".$pMethod."\n"."Amount: ".$amount."\n";
       $message_line4 = "\n\nFor any further questions please contact us at aatana.ec@gmail.com\n";
@@ -64,7 +64,7 @@ switch ($method) {
       
 
       $to = $email;
-      $subject = "AATA donation details of ".$name;
+      $subject = "AATA sponsorship details of ".$name;
       
       //Email sent
       mail($to, $subject, $message_body, "Cc:aatana.ec@gmail.com, subhasshetty@gmail.com");

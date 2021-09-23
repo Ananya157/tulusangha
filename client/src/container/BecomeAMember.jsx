@@ -263,6 +263,7 @@
 import "../styles/home.scss";
 import React from "react";
 import { TuluForm } from '../components/TuluForm'
+import pdf from "../assets/documents/aata_constitution_and_bylaws.pdf";
 
 export const BecomeAMember = () => {
     const page = "BecomeAMember"
@@ -287,6 +288,7 @@ export const BecomeAMember = () => {
                 </h1>
             </div>
             <TuluForm whichpage={page} />
+            <h4 className='disclamer_bylaw'>*Please note that by clicking Join Us you agree to abide by the <a href = {pdf} target = "_blank">By-Laws</a> of the association</h4>
         </div>
     )
 }

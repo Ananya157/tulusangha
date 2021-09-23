@@ -55,7 +55,7 @@ switch ($method) {
       {
         $message_line2 = "\nYour donation is via Paypal. Please find the entered details below:\n";
       }
-      $message_line3 = "Name: ".$name."\n"."Current Member: ".$member."\n"."Address: ".$address."\n"."City: ".$city."\n"."State: ".$state."\n"."ZipCode: ".$zip."\n"."Donation Purpose: ".$donationPurpose."\n"."Email: ".$email."\n"."Phone: ".$phone."\n"."Payment Method: ".$pMethod."\n"."Amount: ".$amount."\n";
+      $message_line3 = "Name: ".$name."\n"."Current Member: ".$member."\n"."Address: ".$address."\n"."City: ".$city."\n"."State: ".$state."\n"."ZipCode: ".$zip."\n"."Donation Type: ".$donorType."\n"."Email: ".$email."\n"."Phone: ".$phone."\n"."Payment Method: ".$pMethod."\n"."Amount: ".$amount."\n";
       $message_line4 = "\n\nFor any further questions please contact us at aatana.ec@gmail.com\n";
 
       $message_body = $message_line1.$message_line2.$message_line3.$message_line4;
