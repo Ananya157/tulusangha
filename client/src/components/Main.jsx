@@ -10,7 +10,9 @@ import {
     VideoCameraOutlined,
     HistoryOutlined,
     UsergroupAddOutlined,
-    UpOutlined
+    UpOutlined,
+    DollarOutlined,
+    SoundOutlined
 } from '@ant-design/icons';
 import "../styles/main.scss";
 import { FormattedMessage } from 'react-intl'
@@ -97,10 +99,10 @@ export const Main = props => {
                             <Menu.Item key="becomeAMember" icon={<UsergroupAddOutlined />}>
                                 <FormattedMessage id="Become A Member" />
                             </Menu.Item>
-                            <Menu.Item key="donate" icon={<UsergroupAddOutlined />}>
+                            <Menu.Item key="donate" icon={<DollarOutlined /> }>
                                 <FormattedMessage id="Donation" />
                             </Menu.Item>
-                            <Menu.Item key="sponsor" icon={<UsergroupAddOutlined />}>
+                            <Menu.Item key="sponsor" icon={<SoundOutlined />}>
                                 <FormattedMessage id="Sponsorship" />
                             </Menu.Item>
                             {/*<Menu.Item key="checkMembers" icon={<UsergroupAddOutlined />}>
