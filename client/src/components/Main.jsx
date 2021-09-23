@@ -9,7 +9,7 @@ import {
     TeamOutlined,
     VideoCameraOutlined,
     HistoryOutlined,
-    UsergroupAddOutlined,
+    UserOutlined,
     UpOutlined,
     DollarOutlined,
     SoundOutlined
@@ -96,7 +96,7 @@ export const Main = props => {
                                 <Menu.Item key="california"><FormattedMessage id="California" /></Menu.Item>
                                 <Menu.Item key="newYork"><FormattedMessage id="New York" /></Menu.Item>
                             </SubMenu> */}
-                            <Menu.Item key="becomeAMember" icon={<UsergroupAddOutlined />}>
+                            <Menu.Item key="becomeAMember" icon={<UserOutlined />}>
                                 <FormattedMessage id="Become A Member" />
                             </Menu.Item>
                             <Menu.Item key="donate" icon={<DollarOutlined /> }>
