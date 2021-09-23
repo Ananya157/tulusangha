@@ -33,12 +33,13 @@ export const TuluForm = props => {
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
     const [zipcode, setZipcode] = useState('')
-    const [memberType, setMemberType] = useState('Grand Patron')
-    const [donorType, setDonorType] = useState('Grand Patron')
-    const [sponsorType, setSponsorType] = useState('Grand Patron')
+    const [memberType, setMemberType] = useState('grandPatron')
+    const [donorType, setDonorType] = useState('general')
+    const [sponsorType, setSponsorType] = useState('sponsoredPicture')
     const [amount, setAmount] = useState()
     const [paymentMethod, setPaymentMethode] = useState('')  
     const [disableInput, setDisable]  = useState(false) 
+    const [loading, setLoading] = useState(false)
     const page = props.whichpage;
     const becomeAMember = props.whichpage === "BecomeAMember" ? true : false
     const donate = props.whichpage === "Donate" ? true : false
@@ -51,6 +52,7 @@ export const TuluForm = props => {
             setAmount(250)
         } else if (sponsor) {
             setAmount(75)
+            setDisable(true)
         }
     }, [becomeAMember, donate, sponsor])
    
@@ -59,6 +61,7 @@ export const TuluForm = props => {
         let addData = false;
         let url = ''
         let formData = new FormData();
+        setLoading(true)
         formData.append('name', values.name)
         formData.append('address', values.address)
         formData.append('city', values.city)
@@ -79,6 +82,7 @@ export const TuluForm = props => {
             }).then(function (response) {
                 if (response.data.includes("Email already")) {
                     setIsEmailExistModalVisible(true); 
+                    setLoading(false)
                 } else if (response.data.includes("Email does not")) {
                     formData.append('spouseName', values.spouseName)
                     formData.append('type', values.memberType) 
@@ -86,9 +90,11 @@ export const TuluForm = props => {
                     setSpouseName(values.spouseName);setMemberType(values.memberType)
                     functionCall(values.paymentMethod, addData,url,formData)
                 } else {
+                    setLoading(false)
                     message.error('Something went wrong while adding fetching email data from our database', 5);
                 }
             }).catch (function (response) {
+                setLoading(false)
                 console.log(response)
             });
         }else if (sponsor){
@@ -113,6 +119,7 @@ export const TuluForm = props => {
             addData = true
         } else if (paymentMethod === "paypal") {
             setisPayPal(true);
+            setLoading(false)
         }
         if (addData) {
             axios({
@@ -126,11 +133,14 @@ export const TuluForm = props => {
                         message.success('Data Successfully Added', 5);
                         setAmount(0)
                         form.resetFields();
+                        setLoading(false)
                     } else {
+                        setLoading(false)
                         message.error('Something went wrong while adding data to our database', 5);
                     }
                 })
                 .catch(function (response) {
+                    setLoading(false)
                     console.log(response)
                 });
         }
@@ -175,9 +185,9 @@ export const TuluForm = props => {
     }
 
     const onChangeDonate = (values) => {
-        if (values === "tudor") {
+        if (values === "general") {
             form.setFieldsValue({ amount: 250 })
-            setAmount(250); setDonorType('tudor');
+            setAmount(250); setDonorType('general');
         } else if (values === "bolpu") {
             setAmount(251); setDonorType('bolpu')
             form.setFieldsValue({ amount: 251 }); 
@@ -187,25 +197,25 @@ export const TuluForm = props => {
         } else if (values === "aisra") {
             setAmount(1000); setDonorType('aisra')
             form.setFieldsValue({ amount: 1000 }); 
-        } else if (values === "preme") {
-            setAmount(5000); setDonorType('preme')
+        } else if (values === "perme") {
+            setAmount(5000); setDonorType('perme')
             form.setFieldsValue({ amount: 5000 }); 
         }
     }
 
     const onChangeSponsor = (values) => {
         if (values === "sponsoredPicture") {
-            form.setFieldsValue({ amount: 1000 })
-            setAmount(1000); setSponsorType('sponsoredPicture');
+            form.setFieldsValue({ amount: 75 })
+            setAmount(75); setSponsorType('sponsoredPicture'); 
         } else if (values === "sponsoredCrawl") {
-            setAmount(500); setSponsorType('sponsoredCrawl')
-            form.setFieldsValue({ amount: 500 }); setDisable(false)
+            setAmount(25); setSponsorType('sponsoredCrawl')
+            form.setFieldsValue({ amount: 25 }); 
         } else if (values === "sponsoringBanner") {
-            setAmount(100); setSponsorType('sponsoringBanner'); setDisable(true)
-            form.setFieldsValue({ amount: 100 })
-        } else if (values === "SponsoringCrwal") {
-            setAmount(50); setSponsorType('SponsoringCrwal')
-            form.setFieldsValue({ amount: 50 }); setDisable(true)
+            setAmount(250); setSponsorType('sponsoringBanner'); 
+            form.setFieldsValue({ amount: 250 })
+        } else if (values === "SponsoringCrawl") {
+            setAmount(75); setSponsorType('SponsoringCrawl')
+            form.setFieldsValue({ amount: 75 }); 
         }
     }
 
@@ -231,7 +241,7 @@ export const TuluForm = props => {
                  </Modal>
                 <Form
                     form={form} name="register" onFinish={onFinish} labelCol={{span: 4,}} wrapperCol={{span: 14,}} layout="horizontal"
-                    initialValues={{ prefix: '+1', paymentMethod: 'cheque', currentMember: 'no', memberType: 'grandPatron', donationType: 'tudor', sponsorType:'sponsoredPicture' }}
+                    initialValues={{ prefix: '+1', paymentMethod: 'cheque', currentMember: 'no', memberType: 'grandPatron' ,donationType: 'general', sponsorType:'sponsoredPicture' }}
                     onValuesChange={onFormLayoutChange} size={componentSize} validateMessages={validateMessages} >
                     {becomeAMember && (
                         <>
@@ -243,8 +253,8 @@ export const TuluForm = props => {
                              <Select.Option value="individual">Individual-$50</Select.Option>
                          </Select>
                         </Form.Item>
-                        <Form.Item label="Amount" name="amount" rules={[{ type: 'number', min: amount },]} disable={disableInput}>
-                            <InputNumber defaultValue={amount} disabled={disableInput}/>
+                        <Form.Item label="Amount" name="amount" rules={[{ type: 'number', min: amount },]} initialValue={1000}>
+                            <InputNumber disabled={disableInput} />
                         </Form.Item>
                         </>
                     )}
@@ -252,18 +262,18 @@ export const TuluForm = props => {
                         <>
                             <Form.Item label="Donation Type" name="donationType" >
                                 <Select onChange={onChangeDonate}>
-                                    <Select.Option value="tudor" >AATA Tudor: Upto to $250</Select.Option>
+                                    <Select.Option value="general">AATA General Donation: Upto to $250</Select.Option>
                                     <Select.Option value="bolpu">AATA Bolpu: Above $250</Select.Option>
                                     <Select.Option value="bolli">AATA Bolli: Above $500</Select.Option>
                                     <Select.Option value="aisra">AATA Aisra: Above $1000</Select.Option>
-                                    <Select.Option value="preme">AATA Prerme: Above $5000</Select.Option>
+                                    <Select.Option value="perme">AATA Perme: Above $5000</Select.Option>
                                 </Select>
                             </Form.Item>
-                            {donorType ==="tudor" ? (<>
-                                    <Form.Item label="Amount" name="amount" rules={[{ type: 'number', max: amount },]}>
-                                        <InputNumber defaultValue={amount} />
+                            {donorType ==="general" ? (<>
+                                    <Form.Item label="Amount" name="amount" rules={[{ type: 'number', max: amount },]} initialValue={250}>
+                                        <InputNumber />
                                     </Form.Item> </>
-                            ):(<> <Form.Item label="Amount" name="amount" rules={[{ type: 'number', min: amount },]}>
+                            ):(<> <Form.Item label="Amount" name="amount" rules={[{ type: 'number', min: amount },]} initialValue={251}>
                                         <InputNumber defaultValue={amount} />
                                     </Form.Item></>)}  
                         </>
@@ -275,11 +285,11 @@ export const TuluForm = props => {
                                     <Select.Option value="sponsoredPicture" >Sponsored Picture Greeting: $75 per greeting</Select.Option>
                                     <Select.Option value="sponsoredCrawl">Sponsored Crawl Greeting: $25 per greeting</Select.Option>
                                     <Select.Option value="sponsoringBanner">Business Sponsoring - Banner: $250 per greeting </Select.Option>
-                                    <Select.Option value="SponsoringCrwal">Business Sponsoring - Crawl: $75 per greeting</Select.Option>
+                                    <Select.Option value="SponsoringCrawl">Business Sponsoring - Crawl: $75 per greeting</Select.Option>
                                 </Select>
                             </Form.Item>
-                            <Form.Item label="Amount" name="amount" rules={[{ type: 'number', min: amount },]}>
-                                <InputNumber defaultValue={amount} />
+                            <Form.Item label="Amount" name="amount" rules={[{ type: 'number', min: amount },]} initialValue={75}>
+                                <InputNumber disabled/>
                             </Form.Item>
                         </>
                     )}
@@ -329,7 +339,7 @@ export const TuluForm = props => {
                         </Select>
                     </Form.Item>
                     <Form.Item {...tailFormItemLayout}>
-                        <Button type="primary" htmlType="submit" className="joinUsButton">
+                        <Button type="primary" htmlType="submit" className="joinUsButton" loading={loading}>
                             {becomeAMember && (<>Join Us</>)}
                             {donate && (<>Please Donate</>)}
                             {sponsor && (<>Please Sponsor</>)}

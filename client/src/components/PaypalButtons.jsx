@@ -7,12 +7,12 @@ import axios from 'axios';
 import { message } from 'antd'
 
 const CLIENT = {
-    //Commented ID is production version. Always uncomment the correct ID while deploying.
-    //sandbox: "Aa7mAU7gnIw3MGT62xbYCTY2eR_JT-FC4h9aX5j96Eh2cQdmSvP3yWp4eZL-8bteYuODT-e7b1GCFMFj",
-    //production: "Aa7mAU7gnIw3MGT62xbYCTY2eR_JT-FC4h9aX5j96Eh2cQdmSvP3yWp4eZL-8bteYuODT-e7b1GCFMFj"
-    sandbox: "AVRxqx_n10Ia4qNVrdvUt-V3bUyL1xc6J8vvasAOkWYfLd7BwyCkJ46AKJLQGOqjTPa4jrEgsV-7fOtp",
-    production: "AVRxqx_n10Ia4qNVrdvUt-V3bUyL1xc6J8vvasAOkWYfLd7BwyCkJ46AKJLQGOqjTPa4jrEgsV-7fOtp"
-};
+    
+    //sandbox: "Aa7mAU7gnIw3MGT62xbYCTY2eR_JT-FC4h9aX5j96Eh2cQdmSvP3yWp4eZL-8bteYuODT-e7b1GCFMFj",  //Production
+    //production: "Aa7mAU7gnIw3MGT62xbYCTY2eR_JT-FC4h9aX5j96Eh2cQdmSvP3yWp4eZL-8bteYuODT-e7b1GCFMFj"  //Production
+    //sandbox: "AVRxqx_n10Ia4qNVrdvUt-V3bUyL1xc6J8vvasAOkWYfLd7BwyCkJ46AKJLQGOqjTPa4jrEgsV-7fOtp",    //TestID
+    //production: "AVRxqx_n10Ia4qNVrdvUt-V3bUyL1xc6J8vvasAOkWYfLd7BwyCkJ46AKJLQGOqjTPa4jrEgsV-7fOtp"  //TestID
+}; 
 
 const CLIENT_ID =
     process.env.NODE_ENV === "production" ? CLIENT.production : CLIENT.sandbox;

@@ -11,7 +11,7 @@ export const Donate = () => {
                     Donation
                 </h1>
                 <h1 className="homeHeader tuluLipi marginBorder">
-                    AATA Tudor: Upto to $250
+                    AATA General Donor: Upto to $250
                     <br />
                     AATA Bolpu: Above $250
                     <br />
