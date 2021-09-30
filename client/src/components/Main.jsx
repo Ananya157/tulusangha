@@ -68,7 +68,7 @@ export const Main = props => {
                                 <Menu.Item key="ourPartners"><FormattedMessage id="Our Partners" /></Menu.Item>
                             </SubMenu> */}
                             <SubMenu key="activities" icon={<VideoCameraOutlined />} title="Activities">
-                                {/* <Menu.Item key="events"><FormattedMessage id="Events" /></Menu.Item> */}
+                                <Menu.Item key="events"><FormattedMessage id="Events" /></Menu.Item>
                                 <Menu.Item key="mediaCoverage"><FormattedMessage id="Media Coverage" /></Menu.Item>
                                 <Menu.Item key="newsletter"><FormattedMessage id="Newsletter" /></Menu.Item>
                             </SubMenu>
