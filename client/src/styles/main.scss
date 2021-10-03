@@ -15,17 +15,23 @@
     .title {
         text-align: center;
         display: block;
-        font-size: 3rem;
+        font-size: 2rem;
         color: $secondary-color;
         font-weight: bolder;
         font-family: serif;
     }
+      @media (max-width: 640px) {
+         .title{
+             font-size: small;
+             height: 25px;
+         }
+      }
     .bannerImage {
         width: 100%;
     }
 
     .ant-layout-sider-trigger {
-        color: white;
+        color: $third-color;
         background-color: $secondary-color;
     }
 
@@ -43,25 +49,25 @@
     }
 
     .sidebar .ant-menu-item {
-        color: white;
+        color: $third-color;
     }
 
     .ant-menu-item-selected {
         a {
-            color: white;
+            color: $third-color;
         }
     }
 
     .sidebar .ant-menu-submenu-arrow {
-        color: white;
+        color: $third-color;
     }
 
     .sidebar .ant-menu-title-content {
-        color: white;
+        color: $third-color;
     }
 
     .sidebar .ant-menu-submenu-title {
-        color: white;
+        color: $third-color;
     }
 
     .scrollUp {
@@ -70,6 +76,31 @@
         background-color: $primary-color;
         text-align: center;
         font-size: 14px;
-        color: white;
+        color: $third-color;
+    }
+
+    .footerStyle{ 
+            // margin: auto;
+            // width: 50%;
+            // display: flex
+           background-color: $secondary-color;
+            text-align: center;;
+    }
+    .socialmediaimage{
+        font-size: 30px;
+        margin-right: 20px;
+    }
+    .youtube{
+        color: #eb3223;
+    }
+    .instagram{
+        color: black;
+    }
+    .facebook {
+        color: #4968ad;
+    }
+    .footerHeader{
+        font-size: 20px;
+        color:$primary-color;
     }
 }
