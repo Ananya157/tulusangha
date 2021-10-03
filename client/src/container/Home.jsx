@@ -16,7 +16,7 @@ export const Home = () => {
             <h2 className="homeHeader marginBorder homeInfo">
                 <p>We are excited to invite you to the inauguration of our association "All America Tulu Association".
                 You can watch the live event on our youtube channel on October 10th 2021. Please find the details on our event poster.</p>
-                <a href = 'https://aatana.org/AATALive' target = "_blank">AATALive</a>
+                <a href = 'https://aatana.org/AATALive' target = "_blank" rel="noreferrer">AATALive</a>
             </h2>
             
         </div>
