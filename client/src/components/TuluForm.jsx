@@ -4,7 +4,7 @@ import "../styles/home.scss";
 import React, { useState, useEffect } from "react";
 import { Form, Input, Button, Select, Modal, message, InputNumber } from 'antd';
 import PaypalButtons from "./PaypalButtons";
-import SelectUSState from 'react-select-us-states';
+import {DropDown} from "./DropDown";
 import axios from 'axios';
 
 const { Option } = Select;
@@ -18,6 +18,8 @@ const validateMessages = {
         range: '${label} must be between ${min}',
     },
 };
+
+
 export const TuluForm = props => {
     const [form] = Form.useForm();
     const [isPayPal, setisPayPal] = useState(false);
@@ -37,14 +39,16 @@ export const TuluForm = props => {
     const [donorType, setDonorType] = useState('general')
     const [sponsorType, setSponsorType] = useState('sponsoredPicture')
     const [amount, setAmount] = useState()
-    const [paymentMethod, setPaymentMethode] = useState('')  
+    const [paymentMethod, setPaymentMethode] = useState('')
+    const [namesToDisplay, setNamesToDisplay] = useState('')
+    const [messagesToDisplay, setMessagesToDisplay] = useState('')
     const [disableInput, setDisable]  = useState(false) 
     const [loading, setLoading] = useState(false)
     const page = props.whichpage;
     const becomeAMember = props.whichpage === "BecomeAMember" ? true : false
     const donate = props.whichpage === "Donate" ? true : false
     const sponsor = props.whichpage === "Sponsor" ? true : false
-   
+    
     useEffect(() => {
         if (becomeAMember) {
             setAmount(1000)
@@ -99,6 +103,9 @@ export const TuluForm = props => {
             });
         }else if (sponsor){
             formData.append('type', values.sponsorType)
+            formData.append('namesToDisplay', values.namesToDisplay)
+            formData.append('messagesToDisplay', values.messagesToDisplay)
+            setMessagesToDisplay(values.messagesToDisplay); setNamesToDisplay(values.namesToDisplay) 
             url = 'https://aatana.org/api/sponsor.php'
             functionCall(values.paymentMethod, addData, url, formData)
         } else if( donate){
@@ -110,6 +117,11 @@ export const TuluForm = props => {
         }
     };
 
+    const onchange = (data) => {
+        //setValue(data)
+        setState(data)
+        console.log("Form>", data);
+    }
     const functionCall = (paymentMethod, addData, url, formData)=>{
         if (paymentMethod === "zelle") {
             setIsZelleModalVisible(true);
@@ -146,7 +158,6 @@ export const TuluForm = props => {
         }
 
     }
-
     const onFormLayoutChange = ({ size }) => {
         setComponentSize(size);
     }
@@ -222,8 +233,8 @@ export const TuluForm = props => {
     if (isPayPal) {
         return (
             <div>
-                <PaypalButtons page={page} name={name} spouseName={spouseName} address={address} city={city} state={state} zipcode={zipcode} 
-                    amount={amount} email={email} phone={phone} pay={paymentMethod} memberType={memberType} donorType={donorType} sponsorType={sponsorType} />
+                <PaypalButtons page={page} name={name} spouseName={spouseName} address={address} city={city} state={state} zipcode={zipcode} messagesToDisplay={messagesToDisplay}
+                    amount={amount} email={email} phone={phone} pay={paymentMethod} memberType={memberType} donorType={donorType} sponsorType={sponsorType} namesToDisplay={namesToDisplay}/>
             </div>
         )
     } else {
@@ -291,6 +302,12 @@ export const TuluForm = props => {
                             <Form.Item label="Amount" name="amount" rules={[{ type: 'number', min: amount },]} initialValue={75}>
                                 <InputNumber disabled/>
                             </Form.Item>
+                            <Form.Item label="Names to Display " name="namesToDisplay ">
+                                <Input />
+                            </Form.Item>
+                            <Form.Item label="Messages to Display" name="messagesToDisplay">
+                                <Input />
+                            </Form.Item>
                         </>
                     )}
                     <Form.Item label="Name" name="name"
@@ -327,9 +344,8 @@ export const TuluForm = props => {
                         rules={[{ required: true, message: 'Please enter your zipcode!', },]} >
                         <Input />
                     </Form.Item>
-                    <Form.Item label="State" name="state"
-                        rules={[{ required: true, message: 'Please select your state!', },]} >
-                        <SelectUSState className="ant-input" id="state" />
+                    <Form.Item label="State" name="state" >
+                        <DropDown value={state} onchange={(e) => { onchange(e) }}/>
                     </Form.Item>
                     <Form.Item label="Payment" name="paymentMethod">
                         <Select>
