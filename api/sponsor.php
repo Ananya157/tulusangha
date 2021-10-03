@@ -32,7 +32,9 @@ switch ($method) {
       $pMethod = $_POST['pay']; 
       $amount = $_POST['amount'];
       $sponsorPurpose = $_POST['type'];
-      $sql = "INSERT INTO `Sponsors`(`Name`, `Address`, `City`, `ZIP`, `Email`, `Phone`, `P-Method`, `State`, `SponsorPurpose`, `Amount`) values ('$name', '$address', '$city', '$zip', '$email', '$phone', '$pMethod', '$state', '$sponsorPurpose', '$amount')"; 
+      $namesToDisplay = $_POST['namesToDisplay'];
+      $messagesToDisplay = $_POST['messagesToDisplay'];
+      $sql = "INSERT INTO `Sponsors`(`Name`, `Address`, `City`, `ZIP`, `Email`, `Phone`, `P-Method`, `State`, `SponsorPurpose`, `Amount`,`NamesToDisplay`,`MessagesToDisplay`) values ('$name', '$address', '$city', '$zip', '$email', '$phone', '$pMethod', '$state', '$sponsorPurpose', '$amount', '$namesToDisplay','$messagesToDisplay')"; 
       $eLog="/tmp/mailError.log";
       //Get the size of the error log
       //ensure it exists, create it if it doesn't
