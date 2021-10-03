@@ -12,15 +12,19 @@ import {
     UserOutlined,
     UpOutlined,
     DollarOutlined,
-    SoundOutlined
+    MoneyCollectOutlined,
+    YoutubeOutlined,
+    FacebookOutlined,
+    InstagramOutlined
 } from '@ant-design/icons';
 import "../styles/main.scss";
 import { FormattedMessage } from 'react-intl'
 import { IntlProvider } from 'react-intl';
 import TuluTitle from '../assets/images/tuluTitle.jpg'
+import Logo from '../assets/images/logo.jpg'
 
 const { SubMenu } = Menu;
-const { Header, Sider, Content } = Layout;
+const { Header, Sider, Content, Footer } = Layout;
 
 export const Main = props => {
     const history = useHistory();
@@ -34,10 +38,15 @@ export const Main = props => {
         <IntlProvider >
             <Layout className="layout">
                 <Header>
-                    <Row><Col span={24}><span className="title">ALL AMERICA TULU ASSOCIATION</span></Col></Row>
-                    <Row><Col span={24}><img className="bannerImage" alt="Tulu Title" src={TuluTitle} /></Col></Row>
+                    <Row>
+                        <Col xs={3}><img className="bannerImage logo" alt="Tulu Title" src={Logo} /></Col>
+                        <Col xs={21}>
+                            <span className="title">ALL AMERICA TULU ASSOCIATION</span>
+                            <img className="bannerImage" alt="Tulu Title" src={TuluTitle} />
+                        </Col>
+                    </Row>
+                    
                 </Header>
-
                 <Layout className="site-layout">
                     <Sider collapsible collapsed={sideBarCollapsed} onCollapse={toggleSidebar} className="sidebar">
                         <Menu
@@ -102,14 +111,11 @@ export const Main = props => {
                             <Menu.Item key="donate" icon={<DollarOutlined /> }>
                                 <FormattedMessage id="Donation" />
                             </Menu.Item>
-                            <Menu.Item key="sponsor" icon={<SoundOutlined />}>
+                            <Menu.Item key="sponsor" icon={<MoneyCollectOutlined />}>
                                 <FormattedMessage id="Sponsorship" />
                             </Menu.Item>
-                            {/*<Menu.Item key="checkMembers" icon={<UsergroupAddOutlined />}>
+                            {/* <Menu.Item key="checkMembers" icon={<UsergroupAddOutlined />}>
                                 <FormattedMessage id="Check Members" />
-                            </Menu.Item>
-                            <Menu.Item key="contactUs" icon={<ContactsOutlined />}>
-                                <FormattedMessage id="Contact Us" />
                             </Menu.Item> */}
                         </Menu>
                     </Sider>
@@ -125,9 +131,22 @@ export const Main = props => {
                             <div className="scrollUp"><UpOutlined /></div>
                         </BackTop>
                         <Routes />
+                        <Footer className="footerStyle">
+                            <div className="footerHeader">
+                                Follow us on
+                            </div>
+                            <div>
+                                <span className="socialmediaimage"> <a href="https://www.youtube.com/channel/UCU9Z_Tjslhic2NITePVculg" target="_blank" rel="noreferrer"><YoutubeOutlined className="youtube" /></a></span>
+                                <span className="socialmediaimage"> <a href="https://www.facebook.com/aata.northamerica/" target="_blank" rel="noreferrer"><FacebookOutlined className="facebook" /></a></span>
+                                <span className="socialmediaimage"> <a href="https://www.instagram.com/aata.koota/" target="_blank" rel="noreferrer"><InstagramOutlined className="instagram" /></a></span>
+                            </div>
+                            
+                            </Footer>
                     </Content>
+                    
                 </Layout>
             </Layout>
+            
         </IntlProvider>
     )
 }
