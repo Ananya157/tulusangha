@@ -42,6 +42,7 @@ switch ($method) {
       fclose($fh);
       $originalsize = filesize($eLog);
       //Details to send an email to the member who registers. Note to remember is that in the current server we can only send 250 emails per day.
+      $message_line0 = "Hello ".$name.", \n\n";
       $message_line1 = "Thank you for your sponsorship to All America Tulu Association.\n"; 
       
       if($pMethod == 'zelle'){
@@ -55,10 +56,10 @@ switch ($method) {
       {
         $message_line2 = "\nYour sponsorship is via Paypal. Please find the entered details below:\n";
       }
-      $message_line3 = "Name: ".$name."\n"."Address: ".$address."\n"."City: ".$city."\n"."State: ".$state."\n"."ZipCode: ".$zip."\n"."Sponsor Purpose: ".$sponsorPurpose."\n"."Email: ".$email."\n"."Phone: ".$phone."\n"."Payment Method: ".$pMethod."\n"."Amount: ".$amount."\n";
+      $message_line3 = "Name: ".$name."\n"."Address: ".$address."\n"."City: ".$city."\n"."State: ".$state."\n"."ZipCode: ".$zip."\n"."Sponsor Purpose: ".$sponsorPurpose."\n"."Email: ".$email."\n"."Phone: ".$phone."\n"."Payment Method: ".$pMethod."\n"."Amount: ".$amount."\n"."Names to Display: ".$namesToDisplay."\n"."Messages to Display: ".$messagesToDisplay."\n";
       $message_line4 = "\n\nFor any further questions please contact us at aatana.ec@gmail.com\n";
 
-      $message_body = $message_line1.$message_line2.$message_line3.$message_line4;
+      $message_body = $message_line0.$message_line1.$message_line2.$message_line3.$message_line4;
 
       //Data is being added
       mysqli_query($con, $sql);

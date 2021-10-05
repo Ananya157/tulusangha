@@ -43,6 +43,8 @@ switch ($method) {
       $sql = "INSERT INTO `Members`(`Name`, `SpouseName`, `Address`, `City`, `ZIP`, `Email`, `Phone`, `P-Method`, `State`, `MemType`, `Amount`) values ('$name', '$spouseName', '$address', '$city', '$zip', '$email', '$phone', '$pMethod', '$state', '$memType', '$amount')"; 
       
       //Details to send an email to the member who registers. Note to remember is that in the current server we can only send 250 emails per day.
+      
+      $message_line0 = "Hello ".$name.", \n\n";
       $message_line1 = "Thank you for joining the All America Tulu Association. \n"; 
       
       if($pMethod == 'zelle'){
@@ -59,7 +61,7 @@ switch ($method) {
       $message_line3 = "Name: ".$name."\n"."Spouse Name: ".$spouseName."\n"."Address: ".$address."\n"."City: ".$city."\n"."State: ".$state."\n"."ZipCode: ".$zip."\n"."Membership Type: ".$memType."\n"."Email: ".$email."\n"."Phone: ".$phone."\n"."Payment Method: ".$pMethod."\n"."Amount: ".$amount."\n";
       $message_line4 = "\n\nFor any further questions please contact us at aatana.ec@gmail.com\n";
 
-      $message_body = $message_line1.$message_line2.$message_line3.$message_line4;
+      $message_body = $message_line0.$message_line1.$message_line2.$message_line3.$message_line4;
 
       //Data is being added
       mysqli_query($con, $sql);

@@ -9,7 +9,7 @@ import { message } from 'antd'
 const CLIENT = {
     
     //sandbox: "Aa7mAU7gnIw3MGT62xbYCTY2eR_JT-FC4h9aX5j96Eh2cQdmSvP3yWp4eZL-8bteYuODT-e7b1GCFMFj",  //Production
-    //production: "Aa7mAU7gnIw3MGT62xbYCTY2eR_JT-FC4h9aX5j96Eh2cQdmSvP3yWp4eZL-8bteYuODT-e7b1GCFMFj"  //Production
+    production: "Aa7mAU7gnIw3MGT62xbYCTY2eR_JT-FC4h9aX5j96Eh2cQdmSvP3yWp4eZL-8bteYuODT-e7b1GCFMFj"  //Production
     //sandbox: "AVRxqx_n10Ia4qNVrdvUt-V3bUyL1xc6J8vvasAOkWYfLd7BwyCkJ46AKJLQGOqjTPa4jrEgsV-7fOtp",    //TestID
     //production: "AVRxqx_n10Ia4qNVrdvUt-V3bUyL1xc6J8vvasAOkWYfLd7BwyCkJ46AKJLQGOqjTPa4jrEgsV-7fOtp"  //TestID
 }; 

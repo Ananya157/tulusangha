@@ -65,17 +65,18 @@ export const TuluForm = props => {
         let addData = false;
         let url = ''
         let formData = new FormData();
+        console.log(state)
         setLoading(true)
         formData.append('name', values.name)
         formData.append('address', values.address)
         formData.append('city', values.city)
-        formData.append('state', values.state)
+        formData.append('state', state)
         formData.append('zipcode', values.zipcode)
         formData.append('email', values.email)
         formData.append('phone', values.phone)
         formData.append('amount', values.amount)
         formData.append('pay', values.paymentMethod)
-        setName(values.name); setAddress(values.address); setCity(values.city); setState(values.state); setZipcode(values.zipcode); 
+        setName(values.name); setAddress(values.address); setCity(values.city); setZipcode(values.zipcode); 
         setEmail(values.email); setPhone(values.phone); setAmount(values.amount); setPaymentMethode(values.paymentMethod);
 
         if(becomeAMember){
@@ -302,7 +303,7 @@ export const TuluForm = props => {
                             <Form.Item label="Amount" name="amount" rules={[{ type: 'number', min: amount },]} initialValue={75}>
                                 <InputNumber disabled/>
                             </Form.Item>
-                            <Form.Item label="Names to Display " name="namesToDisplay ">
+                            <Form.Item label="Names to Display " name="namesToDisplay">
                                 <Input />
                             </Form.Item>
                             <Form.Item label="Messages to Display" name="messagesToDisplay">
