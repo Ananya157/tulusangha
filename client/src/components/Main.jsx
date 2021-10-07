@@ -15,13 +15,14 @@ import {
     MoneyCollectOutlined,
     YoutubeOutlined,
     FacebookOutlined,
-    InstagramOutlined
+    InstagramOutlined,
+    ContactsOutlined,
 } from '@ant-design/icons';
 import "../styles/main.scss";
 import { FormattedMessage } from 'react-intl'
 import { IntlProvider } from 'react-intl';
 import TuluTitle from '../assets/images/tuluTitle.jpg'
-import Logo from '../assets/images/logo.jpg'
+import Logo from '../assets/images/logo_adobespark.png'
 
 const { SubMenu } = Menu;
 const { Header, Sider, Content, Footer } = Layout;
@@ -113,6 +114,9 @@ export const Main = props => {
                             </Menu.Item>
                             <Menu.Item key="sponsor" icon={<MoneyCollectOutlined />}>
                                 <FormattedMessage id="Sponsorship" />
+                            </Menu.Item>
+                            <Menu.Item key="contactUs" icon={<ContactsOutlined />}>
+                                <FormattedMessage id="Contact Us" />
                             </Menu.Item>
                             {/* <Menu.Item key="checkMembers" icon={<UsergroupAddOutlined />}>
                                 <FormattedMessage id="Check Members" />
