@@ -5,7 +5,7 @@ export const Home = () => {
     return (
         <div>
             <h1 className="homeHeader marginBorder">
-                All America Tulu Association (AATA) also known as <i>Akila Americoda Tuluvere Angana</i> 
+                All America Tulu Association (AATA) also known as <i>Akila Americoda Tuluvere Angana </i> 
                  is a community organization of people having their origin in Tulunad of karnataka and kerala
                 states of India. AATA was born out of a desire to build a vibrant Tulu community on first day
                 of paggu month of Tulu New Year, April 14, 2021.
